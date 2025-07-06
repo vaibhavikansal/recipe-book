@@ -4,13 +4,16 @@ import Home from '../Home'
 import Recipes from '../Recipes'
 import About from '../About'
 import Createrecipes from '../Createrecipes'
+import Singlerecipe from '../Singlerecipe'
 
 
 const Mainroutes = () => {
+ 
   return <Routes>
     <Route path="/" element={<Home/>} />
     <Route path="/about" element={<About/>} />
     <Route path="/recipes" element={<Recipes/>} />
+     <Route path="/recipes/detail/:id" element={<Singlerecipe/>} />
     <Route path="/createrecipes" element={<Createrecipes/>} />
   </Routes>
 }

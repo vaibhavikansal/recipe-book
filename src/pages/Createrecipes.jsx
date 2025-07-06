@@ -1,9 +1,14 @@
 import { nanoid } from 'nanoid'
-import React, { useContext } from 'react'
+import 'react-toastify/dist/ReactToastify.css';
+import React, { use, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { recipecontext } from '../context/Recipecontext'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Createrecipes = () => {
+ 
+  const navigate=useNavigate();
   const {data,setdata}=useContext(recipecontext)
     const {register,handleSubmit,reset}=useForm()
     const SumbitHandler=(recipe)=>{
@@ -11,11 +16,13 @@ const Createrecipes = () => {
         const copydata=[...data];
         copydata.push(recipe);
         setdata(copydata);
-        reset()
+        toast.success("Yay!! Recipe created");
+        reset();
+        navigate("/recipes");
 
     }
   return (
-    <div className="h-screen w-screen overflow-auto p-4">
+    <div className="w-full min-h-[60vh] flex flex-col items-center justify-center p-8">
     <form className='max-w-xl mx-auto' onSubmit={handleSubmit(SumbitHandler)}>
          <input className='border-b outline-0 text-xl block p-2' {...register("image")} type="url" placeholder='Enter Image URL' />
          
@@ -38,9 +45,10 @@ const Createrecipes = () => {
          
 
           <select className='border-b outline-0 text-xl block p-2' {...register("category")} >
-            <option value="cat-1">Category 1</option>
-            <option value="cat-2">Category 2</option>
-            <option value="cat-3">Category 3</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="supper">Supper</option>
+            <option value="dinner">Dinner</option>
           </select>
 
         <button className="bg-blue-200 text-black hover:bg-gray-400 px-4 py-2 rounded-md shadow block m-10">
