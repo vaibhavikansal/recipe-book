@@ -26,7 +26,7 @@ const Home = () => {
           <p className="text-xl text-gray-100 mb-8 font-medium drop-shadow">Discover, create, and share your favorite recipes with a vibrant community of food lovers.</p>
           <button
             onClick={() => navigate('/recipes')}
-            className="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500 hover:from-pink-400 hover:to-yellow-400 text-white font-bold px-10 py-4 rounded-2xl shadow-xl text-2xl transition-all duration-200 transform hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-pink-300"
+            className="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500 hover:from-pink-400 hover:to-yellow-400 text-white font-bold px-8 py-3 rounded-2xl shadow-xl text-xl transition-all duration-200 transform hover:scale-102 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-pink-300"
           >
             Explore Recipes
           </button>

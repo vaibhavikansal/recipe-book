@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { recipecontext } from '../context/Recipecontext';
@@ -9,14 +9,27 @@ const Singlerecipe = () => {
   const navigate = useNavigate();
   const { data, setdata } = useContext(recipecontext);
   const params = useParams();
+
+  if (!data) {
+    return <div style={{ color: "blue", fontSize: "2rem", textAlign: "center" }}>Loading...</div>;
+  }
+
   const recipe = data.find((recipe) => params.id == recipe.id);
+
+  if (!recipe) {
+    return <div style={{ color: "red", fontSize: "2rem", textAlign: "center" }}>Recipe not found</div>;
+  }
   const { register, handleSubmit, reset } = useForm();
+
   
+  
+
   const SumbitHandler = (updatedRecipe) => {
     const index = data.findIndex((r) => r.id == params.id);
     const copydata = [...data];
     copydata[index] = { ...updatedRecipe, id: params.id };
     setdata(copydata);
+    localStorage.setItem("recipes",JSON.stringify(copydata));
     toast.success("Recipe updated successfully!");
     navigate("/recipes");
   };
@@ -24,13 +37,15 @@ const Singlerecipe = () => {
   const deletehandler = () => {
     const filtereddata = data.filter((r) => r.id != params.id);
     setdata(filtereddata);
+    localStorage.setItem("recipes",JSON.stringify(filtereddata));
     toast.success("Recipe deleted successfully!");
     navigate("/recipes");
   };
 
   return recipe ? (
     <div className='w-full flex'>
-      <div className='left w-1/2 p-2'>
+      <div className=' left w-1/2 p-2'>
+      
         <h1 className='text-4xl font-bold mb-5'>{recipe.title}</h1>
         <img src={recipe.image} alt="image" className='w-[250px] h-[250px] object-cover rounded-xl mb-5'/>
         <p className='text-[20px]'>  <h5 className='font-semibold'>Description: </h5>{recipe.description}</p>
@@ -49,13 +64,13 @@ const Singlerecipe = () => {
         </ul>
         <br/>
       </div>
-      
+
       <div className='right w-1/2 p-2'>
         <form className='max-w-xl mx-auto' onSubmit={handleSubmit(SumbitHandler)}>
           <input className='border-b outline-0 text-xl block p-2' defaultValue={recipe.image} {...register("image")} type="url" placeholder='Enter Image URL' />
-          
+
           <small className='text-red-500 text-xs mb-10'>This will be how error will be shown</small>
-          
+
           <input className='border-b outline-0 text-xl block p-2' defaultValue={recipe.title} {...register("title")} type="text" placeholder='Recipe Title' />
 
           <textarea className='border-b outline-0 text-xl block p-2' defaultValue={recipe.description} {...register("description")}  placeholder='Description' />

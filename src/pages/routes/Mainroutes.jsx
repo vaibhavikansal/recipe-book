@@ -5,6 +5,7 @@ import Recipes from '../Recipes'
 import About from '../About'
 import Createrecipes from '../Createrecipes'
 import Singlerecipe from '../Singlerecipe'
+import Fav from '../Fav'
 
 
 const Mainroutes = () => {
@@ -15,6 +16,7 @@ const Mainroutes = () => {
     <Route path="/recipes" element={<Recipes/>} />
      <Route path="/recipes/detail/:id" element={<Singlerecipe/>} />
     <Route path="/createrecipes" element={<Createrecipes/>} />
+    <Route path="/fav" element={<Fav/>} />
   </Routes>
 }
 

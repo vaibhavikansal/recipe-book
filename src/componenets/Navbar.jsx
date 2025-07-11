@@ -36,6 +36,7 @@ const Navbar = () => {
       >
         Create Recipes
       </NavLink>
+     
     </div>
   )
 }
